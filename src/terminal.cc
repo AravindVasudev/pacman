@@ -16,5 +16,6 @@ Terminal::Terminal(int X, int Y) {
 
     WINDOW *win = newwin(X, Y, 0, 0);
     waddch(win, 'a');
+    printw("hello world");
     wrefresh(win);
 }
