@@ -5,61 +5,69 @@
  */
 
 #include "terminal.hpp"
+
+#include <iostream>
 #include <locale.h>
+#include <fstream>
+#include <string>
 #include <curses.h>
 
 #define WIDTH 28
 #define HEIGHT 31
 
-enum class BlockElement {
-    topLeftCorner,
-    topRightCorner,
-    bottomLeftCorner,
-    bottomRightCorner,
-    horizontal,
-    veritical,
-    innerTopLeftCorner,
-    innerTopRightCorner,
-    innerBottomLeftCorner,
-    innerBottomRightCorner,
+/**
+ *  Cell represents a maze cell.
+ **/
+enum Cell {
+    topLeftCorner = 1,
+    topRightCorner = 2,
+    bottomLeftCorner = 3,
+    bottomRightCorner = 5,
+    horizontal = 2,
+    veritical = 6,
+    innerTopLeftCorner = 10,
+    innerTopRightCorner = 11,
+    innerBottomLeftCorner = 9,
+    innerBottomRightCorner = 12,
+    innerVertical = 7,
+    tee = 8,
+    empty = 0,
 };
 
-int maze[HEIGHT][WIDTH] = {
-    {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 11, 2, 2, 12, 0, 11, 2, 2, 2, 12, 0, 7, 7, 0, 11, 2, 2, 2, 12, 0, 11, 2, 2, 12, 0, 6},
-    {6, 0, 7, 0, 0, 7, 0, 7, 0, 0, 0, 7, 0, 7, 7, 0, 7, 0, 0, 0, 7, 0, 7, 0, 0, 7, 0, 6},
-    {6, 0, 13, 2, 2, 14, 0, 13, 2, 2, 2, 14, 0, 9, 10, 0, 13, 2, 2, 2, 14, 0, 13, 2, 2, 14, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 11, 2, 2, 12, 0, 11, 12, 0, 11, 2, 2, 2, 2, 2, 2, 12, 0, 11, 12, 0, 11, 2, 2, 12, 0, 6},
-    {6, 0, 13, 2, 2, 14, 0, 7, 7, 0, 13, 2, 2, 12, 11, 2, 2, 14, 0, 7, 7, 0, 13, 2, 2, 14, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 7, 13, 2, 2, 12, 0, 7, 7, 0, 11, 2, 2, 14, 7, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 7, 11, 2, 2, 14, 0, 13, 14, 0, 13, 2, 2, 12, 7, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 13, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 14, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6},
-    {4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5},
-};
+const std::string& MAZE_PATH = "./assests/MAZE";
+
+/* readMaze parses the given MAZE file. */
+void readMaze(const std::string& path, int (&maze)[HEIGHT][WIDTH]) {
+    std::ifstream mazeFile(path);
+    std::string line;
+
+    if (!mazeFile.is_open()) {
+        throw;
+    }
+
+    int row = 0;
+    while (mazeFile) {
+        std::getline(mazeFile, line);
+
+        // Ignore comments.
+        if (line.substr(0, 2) == "//") {
+            continue;
+        }
+
+        //
+        for (int col = 0; col < WIDTH; col++) {
+            maze[row][col] = std::atoi(line.substr(col * 3, col * 3 + 3).c_str());
+        }
+
+        row++;
+    }
+}
 
 int main() {
-    /* Terminal terminal(10, 10); */
+    // Parse the maze.
+    int maze[HEIGHT][WIDTH];
+    readMaze(MAZE_PATH, maze);
+
     // Init basics.
     setlocale(LC_ALL, ""); // Get the terminal outta boomer-mode.
     initscr();
@@ -79,7 +87,6 @@ int main() {
                     printw("  ");
                     break;
                 case 1:
-                    /* addch('═'); */
                     printw("╔");
                     break;
                 case 2:
@@ -107,29 +114,19 @@ int main() {
                     printw("╚═");
                     break;
                 case 10:
-                    printw("╝ ");
-                    break;
-                case 11:
                     printw("╔═");
                     break;
-                case 12:
+                case 11:
                     printw("╗ ");
                     break;
-                case 13:
-                    printw("╚═");
-                    break;
-                case 14:
+                case 12:
                     printw("╝ ");
-                    break;
-                case 15:
-                    printw(" ║");
                     break;
             }
         }
         addch('\n');
     }
 
-    /* printw("Hello World"); */
     attroff(A_BOLD);
 
     refresh();
