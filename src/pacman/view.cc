@@ -25,43 +25,43 @@ void View::printMaze(int (&maze)[HEIGHT][WIDTH]) {
       for (int j = 0; j < WIDTH; j++) {
           switch (maze[i][j]) {
               case Cell::empty:
-                  printw("  ");
+                  printw(EMPTY);
                   break;
               case Cell::topLeftCorner:
-                  printw("╔");
+                  printw(TOP_LEFT_CORNER);
                   break;
               case Cell::horizontal:
-                  printw("══");
+                  printw(HORIZONTAL);
                   break;
               case Cell::topRightCorner:
-                  printw("╗");
+                  printw(TOP_RIGHT_CORNER);
                   break;
               case Cell::bottomLeftCorner:
-                  printw("╚");
+                  printw(BOTTOM_LEFT_CORNER);
                   break;
               case Cell::bottomRightCorner:
-                  printw("╝");
+                  printw(BOTTOM_RIGHT_CORNER);
                   break;
               case Cell::veritical:
-                  printw("║");
+                  printw(VERTICAL);
                   break;
               case Cell::innerVertical:
-                  printw("║ ");
+                  printw(INNER_VERTICAL);
                   break;
               case Cell::leftTee:
-                  printw("╦═");
+                  printw(LEFT_TEE);
                   break;
               case Cell::innerBottomLeftCorner:
-                  printw("╚═");
+                  printw(INNER_BOTTOM_LEFT_CORNER);
                   break;
               case Cell::innerTopLeftCorner:
-                  printw("╔═");
+                  printw(INNER_TOP_LEFT_CORNER);
                   break;
               case Cell::innerTopRightCorner:
-                  printw("╗ ");
+                  printw(INNER_TOP_RIGHT_CORNER);
                   break;
               case Cell::innerBottomRightCorner:
-                  printw("╝ ");
+                  printw(INNER_BOTTOM_RIGHT_CORNER);
                   break;
           }
       }
