@@ -10,8 +10,10 @@ public:
   // these. I guess the ideal ideal way of exposing these would be to have
   // getters but I'm choosing the `lazy` design pattern.
   Point position{HERO_X, HERO_Y};
+  Point velocity{0, -1};
 
-  void move(int (&maze)[HEIGHT][WIDTH], const char &input);
+  void move(int (&maze)[HEIGHT][WIDTH]);
+  void input(const char &input);
 };
 
 #endif

@@ -50,7 +50,8 @@ void Game::run() {
       break;
     }
 
-    hero.move(maze, input);
+    hero.input(input);
+    hero.move(maze);
 
     // Draw the canvas.
     view.printMaze(maze);
