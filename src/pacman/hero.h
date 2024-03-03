@@ -7,6 +7,8 @@ class Hero {
   public:
     int X {HERO_X};
     int Y {HERO_Y};
+
+    void move();
 };
 
 #endif

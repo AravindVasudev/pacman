@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <curses.h>
+#include <unistd.h>
 
 
 Game::Game(std::string mazeFile) {
@@ -43,8 +44,21 @@ void Game::readMaze(const std::string& path, int (&maze)[HEIGHT][WIDTH]) {
 }
 
 void Game::run() {
-    view.printMaze(maze);
+    
+    
     refresh();
+
+    while (true) {
+        view.printMaze(maze);
+        view.printHero(hero);
+
+        refresh();
+
+        hero.move();
+        usleep(1000000 / FRAME_RATE);
+    }
+
+
     getch();
     endwin();
 }

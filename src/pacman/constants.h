@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#define FRAME_RATE 60 // 60 FPS
+
 // Game maze size.
 #define WIDTH 28
 #define HEIGHT 31

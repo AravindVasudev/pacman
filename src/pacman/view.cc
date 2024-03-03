@@ -18,7 +18,7 @@ View::View() {
   start_color();
   init_pair(Color::Wall, COLOR_BLUE, COLOR_BLACK);
   init_pair(Color::Pellet, COLOR_YELLOW, COLOR_BLACK);
-  init_pair(Color::HeroC, COLOR_GREEN, COLOR_BLACK);
+  init_pair(Color::HeroC, COLOR_BLACK, COLOR_YELLOW);
 
 }
 
@@ -74,6 +74,7 @@ void View::printWall(const Cell& cell) {
 }
 
 void View::printMaze(int (&maze)[HEIGHT][WIDTH]) {
+  move(0, 0);
   for (int i = 0; i < HEIGHT; i++) {
       for (int j = 0; j < WIDTH; j++) {
         switch (maze[i][j]) {
@@ -98,6 +99,7 @@ void View::printMaze(int (&maze)[HEIGHT][WIDTH]) {
 
 void View::printHero(const Hero& hero) {
     attron(COLOR_PAIR(Color::HeroC));
-    mvprintw(hero.X, hero.Y, ">");
+    mvprintw(hero.X, hero.Y * 2, ">");
     attroff(COLOR_PAIR(Color::HeroC));
+    printw(" ");
 }
