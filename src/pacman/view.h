@@ -3,6 +3,7 @@
 
 #include "constants.h"
 #include "cell.h"
+#include "hero.h"
 
 class View {
   private:
@@ -10,6 +11,7 @@ class View {
   public:
     View();
     void printMaze(int (&maze)[HEIGHT][WIDTH]);
+    void printHero(const Hero& hero);
 };
 
 #endif

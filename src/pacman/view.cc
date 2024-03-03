@@ -3,6 +3,7 @@
 #include "constants.h"
 #include "cell.h"
 #include "color.h"
+#include "hero.h"
 #include <locale.h>
 #include <curses.h>
 
@@ -17,6 +18,7 @@ View::View() {
   start_color();
   init_pair(Color::Wall, COLOR_BLUE, COLOR_BLACK);
   init_pair(Color::Pellet, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(Color::HeroC, COLOR_GREEN, COLOR_BLACK);
 
 }
 
@@ -63,6 +65,9 @@ void View::printWall(const Cell& cell) {
         case Cell::innerBottomRightCorner:
             printw(INNER_BOTTOM_RIGHT_CORNER);
             break;
+        default:
+            // Do nothing.
+            break;
     }
 
   attroff(COLOR_PAIR(Color::Wall));
@@ -89,6 +94,10 @@ void View::printMaze(int (&maze)[HEIGHT][WIDTH]) {
       }
       addch('\n');
   }
+}
 
-  refresh();
+void View::printHero(const Hero& hero) {
+    attron(COLOR_PAIR(Color::HeroC));
+    mvprintw(hero.X, hero.Y, ">");
+    attroff(COLOR_PAIR(Color::HeroC));
 }

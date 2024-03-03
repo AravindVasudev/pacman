@@ -1,4 +1,5 @@
 #include "game.h"
+#include "hero.h"
 #include "view.h"
 
 #include <locale.h>
@@ -43,6 +44,7 @@ void Game::readMaze(const std::string& path, int (&maze)[HEIGHT][WIDTH]) {
 
 void Game::run() {
     view.printMaze(maze);
+    refresh();
     getch();
     endwin();
 }

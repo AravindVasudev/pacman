@@ -5,6 +5,10 @@
 #define WIDTH 28
 #define HEIGHT 31
 
+// Hero Start Position
+#define HERO_X 23
+#define HERO_Y 13
+
 // Box Drawing Constants.
 #define EMPTY "  "
 #define TOP_LEFT_CORNER "╔"
