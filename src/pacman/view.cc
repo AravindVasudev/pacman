@@ -101,7 +101,7 @@ void View::printMaze(int (&maze)[HEIGHT][WIDTH]) {
 
 void View::printHero(const Hero &hero) {
   attron(COLOR_PAIR(Color::HeroC));
-  mvprintw(hero.X, hero.Y * 2, ">");
+  mvprintw(hero.position.X, hero.position.Y * 2, ">");
   attroff(COLOR_PAIR(Color::HeroC));
   printw(" ");
 }
