@@ -11,6 +11,9 @@ View::View() {
   // Init basics.
   setlocale(LC_ALL, ""); // Get the terminal outta boomer-mode.
   initscr();
+  keypad(stdscr, true);
+  curs_set(false);
+  timeout(0);
   raw();
   noecho();
 

@@ -44,11 +44,13 @@ void Game::readMaze(const std::string& path, int (&maze)[HEIGHT][WIDTH]) {
 }
 
 void Game::run() {
-    
-    
-    refresh();
-
     while (true) {
+        char input = getch();
+
+        if (input == 'q') {
+            break;
+        }
+
         view.printMaze(maze);
         view.printHero(hero);
 
@@ -59,6 +61,5 @@ void Game::run() {
     }
 
 
-    getch();
     endwin();
 }
