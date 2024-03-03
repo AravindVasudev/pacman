@@ -51,12 +51,14 @@ void Game::run() {
             break;
         }
 
+        hero.move(maze, input);
+
+        // Draw the canvas.
         view.printMaze(maze);
         view.printHero(hero);
-
         refresh();
 
-        hero.move(maze);
+        // Handle frame rate.
         usleep(1000000 / FRAME_RATE);
     }
 
