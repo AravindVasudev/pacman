@@ -7,17 +7,17 @@
 #include <iostream>
 
 class Game {
-  private:
-    int maze[HEIGHT][WIDTH]{}; // The game maze.
-    View view;
-    Hero hero;
+private:
+  int maze[HEIGHT][WIDTH]{}; // The game maze.
+  View view;
+  Hero hero;
 
-  private:
-    static void readMaze(const std::string& path, int (&maze)[HEIGHT][WIDTH]);
-  public:
-    Game(std::string mazeFile);
-    void run();
+private:
+  static void readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]);
+
+public:
+  Game(std::string mazeFile);
+  void run();
 };
 
 #endif
-

@@ -4,11 +4,11 @@
 #include "constants.h"
 
 class Hero {
-  public:
-    int X {HERO_X};
-    int Y {HERO_Y};
+public:
+  int X{HERO_X};
+  int Y{HERO_Y};
 
-    void move(int (&maze)[HEIGHT][WIDTH], const char& input);
+  void move(int (&maze)[HEIGHT][WIDTH], const char &input);
 };
 
 #endif
