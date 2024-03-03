@@ -54,7 +54,7 @@ void Game::run() {
 
         refresh();
 
-        hero.move();
+        hero.move(maze);
         usleep(1000000 / FRAME_RATE);
     }
 

@@ -8,7 +8,7 @@ class Hero {
     int X {HERO_X};
     int Y {HERO_Y};
 
-    void move();
+    void move(int (&maze)[HEIGHT][WIDTH]);
 };
 
 #endif
