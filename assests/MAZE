@@ -1,8 +1,7 @@
-// Maze for the game.
-// This maze file is ignores all the lines starting with `//` in the top.
-// Cell Type To Integer Map:
-// TBD.
-// For, the maze has to be 31x28. TODO: Fix this.
+// "The" Maze.
+// The integer -> cell equivalent can be found within `cell.h`.
+// The maze has to be 31x28. TODO: Update the code to have have a flexible maze.
+// TODO: Add a guide here on creating custom mazes.
 01 02 02 02 02 02 02 02 02 02 02 02 02 08 08 02 02 02 02 02 02 02 02 02 02 02 02 03 
 06 00 00 00 00 00 00 00 00 00 00 00 00 07 07 00 00 00 00 00 00 00 00 00 00 00 00 06 
 06 00 10 02 02 11 00 10 02 02 02 11 00 07 07 00 10 02 02 02 11 00 10 02 02 11 00 06 

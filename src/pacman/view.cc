@@ -1,6 +1,7 @@
 
 #include "view.h"
 #include "constants.h"
+#include "cell.h"
 #include <locale.h>
 #include <curses.h>
 
@@ -23,43 +24,43 @@ void View::printMaze(int (&maze)[HEIGHT][WIDTH]) {
   for (int i = 0; i < HEIGHT; i++) {
       for (int j = 0; j < WIDTH; j++) {
           switch (maze[i][j]) {
-              case 0:
+              case Cell::empty:
                   printw("  ");
                   break;
-              case 1:
+              case Cell::topLeftCorner:
                   printw("╔");
                   break;
-              case 2:
+              case Cell::horizontal:
                   printw("══");
                   break;
-              case 3:
+              case Cell::topRightCorner:
                   printw("╗");
                   break;
-              case 4:
+              case Cell::bottomLeftCorner:
                   printw("╚");
                   break;
-              case 5:
+              case Cell::bottomRightCorner:
                   printw("╝");
                   break;
-              case 6:
+              case Cell::veritical:
                   printw("║");
                   break;
-              case 7:
+              case Cell::innerVertical:
                   printw("║ ");
                   break;
-              case 8:
+              case Cell::leftTee:
                   printw("╦═");
                   break;
-              case 9:
+              case Cell::innerBottomLeftCorner:
                   printw("╚═");
                   break;
-              case 10:
+              case Cell::innerTopLeftCorner:
                   printw("╔═");
                   break;
-              case 11:
+              case Cell::innerTopRightCorner:
                   printw("╗ ");
                   break;
-              case 12:
+              case Cell::innerBottomRightCorner:
                   printw("╝ ");
                   break;
           }
