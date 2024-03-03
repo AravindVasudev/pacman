@@ -18,6 +18,8 @@ enum Cell {
     innerTopLeftCorner,
     innerTopRightCorner,
     innerBottomRightCorner,
+    pellet,
+    powerPellet,
 };
 
 #endif

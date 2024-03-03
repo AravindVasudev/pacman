@@ -19,5 +19,7 @@
 #define INNER_TOP_LEFT_CORNER "╔═"
 #define INNER_TOP_RIGHT_CORNER "╗ "
 #define INNER_BOTTOM_RIGHT_CORNER "╝ "
+#define PELLET ". "
+#define POWER_PELLET "● "
 
 #endif
