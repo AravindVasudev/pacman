@@ -7,6 +7,7 @@
 class Ghost {
 public:
   Point position{GHOST_X, GHOST_Y};
+  Point velocity{1, 0};
 
   void move(int (&maze)[HEIGHT][WIDTH]);
 };

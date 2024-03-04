@@ -93,6 +93,4 @@ void Game::run() {
     // Handle frame rate.
     usleep(1000000 / FRAME_RATE);
   }
-
-  endwin();
 }
