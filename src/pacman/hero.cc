@@ -1,10 +1,6 @@
 #include "hero.h"
 #include "cell.h"
 
-bool Hero::isWall(const Cell &cell) {
-  return cell > Cell::empty && cell < Cell::pellet;
-}
-
 int Hero::move(int (&maze)[HEIGHT][WIDTH]) {
   Point newPosition{position.X + velocity.X, position.Y + velocity.Y};
 

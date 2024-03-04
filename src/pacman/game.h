@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "constants.h"
+#include "ghost.h"
 #include "hero.h"
 #include "view.h"
 #include <iostream>
@@ -11,6 +12,7 @@ private:
   int maze[HEIGHT][WIDTH]{}; // The game maze.
   View view;
   Hero hero;
+  Ghost ghost;
   int score{};
 
 private:

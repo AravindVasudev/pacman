@@ -3,6 +3,7 @@
 #include "cell.h"
 #include "color.h"
 #include "constants.h"
+#include "ghost.h"
 #include "hero.h"
 #include <curses.h>
 #include <locale.h>
@@ -23,6 +24,7 @@ View::View() {
   init_pair(Color::Wall, COLOR_BLUE, COLOR_BLACK);
   init_pair(Color::Pellet, COLOR_YELLOW, COLOR_BLACK);
   init_pair(Color::HeroC, COLOR_BLACK, COLOR_YELLOW);
+  init_pair(Color::Blinky, COLOR_BLACK, COLOR_RED);
 }
 
 void View::printWall(const Cell &cell) {
@@ -124,4 +126,10 @@ void View::printHero(const Hero &hero) {
   attron(COLOR_PAIR(Color::HeroC));
   mvprintw(hero.position.X + 1, hero.position.Y * 2, mouth.c_str());
   attroff(COLOR_PAIR(Color::HeroC));
+}
+
+void View::printGhost(const Ghost &ghost) {
+  attron(COLOR_PAIR(Color::Blinky));
+  mvprintw(ghost.position.X + 1, ghost.position.Y * 2, "\"");
+  attroff(COLOR_PAIR(Color::Blinky));
 }

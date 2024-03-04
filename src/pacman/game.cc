@@ -44,7 +44,8 @@ void Game::readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]) {
 }
 
 void Game::run() {
-  auto oldTime = std::chrono::steady_clock::now();
+  auto heroTime = std::chrono::steady_clock::now();
+  auto ghostTime = std::chrono::steady_clock::now();
 
   while (true) {
     char input = getch();
@@ -59,18 +60,27 @@ void Game::run() {
     // This time elapsed check just ensures that the hero's speed is independent
     // from the frame rate.
     auto now = std::chrono::steady_clock::now();
-    auto timeElapsed =
-        std::chrono::duration_cast<std::chrono::milliseconds>(now - oldTime)
+    auto heroTimeElapsed =
+        std::chrono::duration_cast<std::chrono::milliseconds>(now - heroTime)
             .count();
 
-    if (timeElapsed > HERO_SPEED) {
+    if (heroTimeElapsed > HERO_SPEED) {
       score += hero.move(maze);
-      oldTime = std::chrono::steady_clock::now();
+      heroTime = std::chrono::steady_clock::now();
+    }
+
+    auto ghostTimeElapsed =
+        std::chrono::duration_cast<std::chrono::milliseconds>(now - ghostTime)
+            .count();
+    if (ghostTimeElapsed > GHOST_SPEED) {
+      ghost.move(maze);
+      ghostTime = std::chrono::steady_clock::now();
     }
 
     // Draw the canvas.
     view.printMaze(maze, score);
     view.printHero(hero);
+    view.printGhost(ghost);
     refresh();
 
     // Handle frame rate.

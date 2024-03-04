@@ -8,6 +8,7 @@ enum Color {
   Wall = 1,
   Pellet,
   HeroC,
+  Blinky,
 };
 
 #endif

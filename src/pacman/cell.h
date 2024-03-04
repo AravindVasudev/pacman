@@ -22,4 +22,7 @@ enum Cell {
   powerPellet,
 };
 
+// Helpers
+bool isWall(const Cell &cell);
+
 #endif

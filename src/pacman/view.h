@@ -3,6 +3,7 @@
 
 #include "cell.h"
 #include "constants.h"
+#include "ghost.h"
 #include "hero.h"
 
 class View {
@@ -14,6 +15,7 @@ public:
   View();
   void printMaze(int (&maze)[HEIGHT][WIDTH], const int &score);
   void printHero(const Hero &hero);
+  void printGhost(const Ghost &ghost);
 };
 
 #endif
