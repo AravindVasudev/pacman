@@ -1,15 +1,18 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#define FRAME_RATE 5 // 60 FPS
+#define FRAME_RATE 60 // 60 FPS
 
 // Game maze size.
 #define WIDTH 28
 #define HEIGHT 31
 
-// Hero Start Position
+// Hero Start Position.
 #define HERO_X 23
 #define HERO_Y 13
+
+// Speeds.
+#define HERO_SPEED 200
 
 // Box Drawing Constants.
 #define EMPTY "  "

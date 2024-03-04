@@ -2,6 +2,7 @@
 #include "hero.h"
 #include "view.h"
 
+#include <chrono>
 #include <curses.h>
 #include <fstream>
 #include <locale.h>
@@ -43,6 +44,8 @@ void Game::readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]) {
 }
 
 void Game::run() {
+  auto oldTime = std::chrono::steady_clock::now();
+
   while (true) {
     char input = getch();
 
@@ -50,8 +53,20 @@ void Game::run() {
       break;
     }
 
+    // Process input.
     hero.input(maze, input);
-    score += hero.move(maze);
+
+    // This time elapsed check just ensures that the hero's speed is independent
+    // from the frame rate.
+    auto now = std::chrono::steady_clock::now();
+    auto timeElapsed =
+        std::chrono::duration_cast<std::chrono::milliseconds>(now - oldTime)
+            .count();
+
+    if (timeElapsed > HERO_SPEED) {
+      score += hero.move(maze);
+      oldTime = std::chrono::steady_clock::now();
+    }
 
     // Draw the canvas.
     view.printMaze(maze, score);

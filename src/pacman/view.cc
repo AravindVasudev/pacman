@@ -117,7 +117,7 @@ void View::printHero(const Hero &hero) {
 
     heroMouthOpen = false;
   } else {
-    mouth = '-';
+    mouth = "—";
     heroMouthOpen = true;
   }
 
