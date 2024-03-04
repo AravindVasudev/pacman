@@ -77,6 +77,13 @@ void Game::run() {
       ghostTime = std::chrono::steady_clock::now();
     }
 
+    if (hero.position.X == ghost.position.X &&
+        hero.position.Y == ghost.position.Y) {
+      move(0, 0);
+      printw("GAME OVER!!!!! SCORE: %d\n", score);
+      return;
+    }
+
     // Draw the canvas.
     view.printMaze(maze, score);
     view.printHero(hero);

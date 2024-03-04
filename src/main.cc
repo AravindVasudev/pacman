@@ -17,4 +17,9 @@ const std::string &MAZE_PATH = "./assests/MAZE";
 int main() {
   Game game(MAZE_PATH);
   game.run();
+
+  // Reset timeout and block.
+  timeout(-1);
+  getch();
+  endwin();
 }
