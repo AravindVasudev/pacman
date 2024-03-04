@@ -134,7 +134,7 @@ void View::printHero(const Hero &hero) {
 }
 
 void View::printGhost(const Ghost &ghost) {
-  attron(COLOR_PAIR(Color::Clyde));
+  attron(COLOR_PAIR(Color::Blinky));
   mvprintw(ghost.position.X + 1, ghost.position.Y * 2, GHOST);
-  attroff(COLOR_PAIR(Color::Clyde));
+  attroff(COLOR_PAIR(Color::Blinky));
 }
