@@ -8,6 +8,7 @@
 class View {
 private:
   void printWall(const Cell &cell);
+  bool heroMouthOpen{};
 
 public:
   View();

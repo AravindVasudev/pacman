@@ -6,6 +6,7 @@
 #include "hero.h"
 #include <curses.h>
 #include <locale.h>
+#include <string>
 
 View::View() {
   // Init basics.
@@ -101,7 +102,26 @@ void View::printMaze(int (&maze)[HEIGHT][WIDTH], const int &score) {
 }
 
 void View::printHero(const Hero &hero) {
+  // Simulate hero chewing.
+  std::string mouth;
+  if (heroMouthOpen) {
+    if (hero.velocity.X == -1 && hero.velocity.Y == 0) { // Up
+      mouth = "V";
+    } else if (hero.velocity.X == 1 && hero.velocity.Y == 0) { // Down
+      mouth = "^";
+    } else if (hero.velocity.X == 0 && hero.velocity.Y == -1) { // Left
+      mouth = ">";
+    } else { // Right
+      mouth = "<";
+    }
+
+    heroMouthOpen = false;
+  } else {
+    mouth = '-';
+    heroMouthOpen = true;
+  }
+
   attron(COLOR_PAIR(Color::HeroC));
-  mvprintw(hero.position.X + 1, hero.position.Y * 2, ">");
+  mvprintw(hero.position.X + 1, hero.position.Y * 2, mouth.c_str());
   attroff(COLOR_PAIR(Color::HeroC));
 }
