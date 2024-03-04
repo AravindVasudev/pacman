@@ -25,6 +25,10 @@ View::View() {
   init_pair(Color::Pellet, COLOR_YELLOW, COLOR_BLACK);
   init_pair(Color::HeroC, COLOR_BLACK, COLOR_YELLOW);
   init_pair(Color::Blinky, COLOR_BLACK, COLOR_RED);
+  init_pair(Color::Inky, COLOR_BLACK, COLOR_CYAN);
+  init_pair(Color::Pinky, COLOR_BLACK, COLOR_MAGENTA);
+  init_pair(Color::Clyde, COLOR_BLACK,
+            COLOR_YELLOW); // TODO: Make Clyde orange.
 }
 
 void View::printWall(const Cell &cell) {
@@ -124,12 +128,13 @@ void View::printHero(const Hero &hero) {
   }
 
   attron(COLOR_PAIR(Color::HeroC));
-  mvprintw(hero.position.X + 1, hero.position.Y * 2, mouth.c_str());
+  mvprintw(hero.position.X + 1, hero.position.Y * 2,
+           mouth.c_str()); // Wierd offsets, I know.
   attroff(COLOR_PAIR(Color::HeroC));
 }
 
 void View::printGhost(const Ghost &ghost) {
-  attron(COLOR_PAIR(Color::Blinky));
-  mvprintw(ghost.position.X + 1, ghost.position.Y * 2, "\"");
-  attroff(COLOR_PAIR(Color::Blinky));
+  attron(COLOR_PAIR(Color::Clyde));
+  mvprintw(ghost.position.X + 1, ghost.position.Y * 2, GHOST);
+  attroff(COLOR_PAIR(Color::Clyde));
 }

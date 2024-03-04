@@ -10,12 +10,12 @@
 // Start Positions.
 #define HERO_X 23
 #define HERO_Y 13
-#define GHOST_X 1
-#define GHOST_Y 1
+#define GHOST_X 14
+#define GHOST_Y 13
 
 // Speeds.
 #define HERO_SPEED 200
-#define GHOST_SPEED 300
+#define GHOST_SPEED 150
 
 // Box Drawing Constants.
 #define EMPTY "  "
@@ -33,6 +33,7 @@
 #define INNER_BOTTOM_RIGHT_CORNER "╝ "
 #define PELLET ". "
 #define POWER_PELLET "● "
+#define GHOST "\""
 
 // Direction Key Code.
 #define KEY_UP 72

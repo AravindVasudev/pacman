@@ -77,6 +77,12 @@ void Game::run() {
       ghostTime = std::chrono::steady_clock::now();
     }
 
+    // Draw the canvas.
+    view.printMaze(maze, score);
+    view.printHero(hero);
+    view.printGhost(ghost);
+
+    // Game over :(
     if (hero.position.X == ghost.position.X &&
         hero.position.Y == ghost.position.Y) {
       move(0, 0);
@@ -84,10 +90,7 @@ void Game::run() {
       return;
     }
 
-    // Draw the canvas.
-    view.printMaze(maze, score);
-    view.printHero(hero);
-    view.printGhost(ghost);
+    // Draw the frame.
     refresh();
 
     // Handle frame rate.

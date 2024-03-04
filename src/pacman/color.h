@@ -9,6 +9,9 @@ enum Color {
   Pellet,
   HeroC,
   Blinky,
+  Pinky,
+  Inky,
+  Clyde,
 };
 
 #endif
