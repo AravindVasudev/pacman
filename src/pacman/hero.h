@@ -1,10 +1,14 @@
 #ifndef HERO_H
 #define HERO_H
 
+#include "cell.h"
 #include "constants.h"
 #include "point.h"
 
 class Hero {
+private:
+  static bool isWall(const Cell &cell);
+
 public:
   // Throwing everything into public since the view layer might need access to
   // these. I guess the ideal ideal way of exposing these would be to have
@@ -13,7 +17,7 @@ public:
   Point velocity{0, -1};
 
   void move(int (&maze)[HEIGHT][WIDTH]);
-  void input(const char &input);
+  void input(int (&maze)[HEIGHT][WIDTH], const char &input);
 };
 
 #endif
