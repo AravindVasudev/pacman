@@ -5,16 +5,24 @@ bool Hero::isWall(const Cell &cell) {
   return cell > Cell::empty && cell < Cell::pellet;
 }
 
-void Hero::move(int (&maze)[HEIGHT][WIDTH]) {
+int Hero::move(int (&maze)[HEIGHT][WIDTH]) {
   Point newPosition{position.X + velocity.X, position.Y + velocity.Y};
 
   // Don't move if wall.
   if (isWall(static_cast<Cell>(maze[newPosition.X][newPosition.Y]))) {
-    return;
+    return 0;
   }
 
   position.X = newPosition.X;
   position.Y = newPosition.Y;
+
+  // If the new position has a pellet, eat it.
+  if (maze[position.X][position.Y] == pellet) {
+    maze[position.X][position.Y] = Cell::empty;
+    return 1;
+  }
+
+  return 0;
 }
 
 void Hero::input(int (&maze)[HEIGHT][WIDTH], const char &input) {

@@ -51,10 +51,10 @@ void Game::run() {
     }
 
     hero.input(maze, input);
-    hero.move(maze);
+    score += hero.move(maze);
 
     // Draw the canvas.
-    view.printMaze(maze);
+    view.printMaze(maze, score);
     view.printHero(hero);
     refresh();
 

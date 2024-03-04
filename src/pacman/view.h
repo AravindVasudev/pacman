@@ -11,7 +11,7 @@ private:
 
 public:
   View();
-  void printMaze(int (&maze)[HEIGHT][WIDTH]);
+  void printMaze(int (&maze)[HEIGHT][WIDTH], const int &score);
   void printHero(const Hero &hero);
 };
 

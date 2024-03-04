@@ -75,8 +75,9 @@ void View::printWall(const Cell &cell) {
   attroff(COLOR_PAIR(Color::Wall));
 }
 
-void View::printMaze(int (&maze)[HEIGHT][WIDTH]) {
+void View::printMaze(int (&maze)[HEIGHT][WIDTH], const int &score) {
   move(0, 0);
+  printw("SCORE: %d\n", score);
   for (int i = 0; i < HEIGHT; i++) {
     for (int j = 0; j < WIDTH; j++) {
       switch (maze[i][j]) {
@@ -101,7 +102,6 @@ void View::printMaze(int (&maze)[HEIGHT][WIDTH]) {
 
 void View::printHero(const Hero &hero) {
   attron(COLOR_PAIR(Color::HeroC));
-  mvprintw(hero.position.X, hero.position.Y * 2, ">");
+  mvprintw(hero.position.X + 1, hero.position.Y * 2, ">");
   attroff(COLOR_PAIR(Color::HeroC));
-  printw(" ");
 }

@@ -11,6 +11,7 @@ private:
   int maze[HEIGHT][WIDTH]{}; // The game maze.
   View view;
   Hero hero;
+  int score{};
 
 private:
   static void readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]);
