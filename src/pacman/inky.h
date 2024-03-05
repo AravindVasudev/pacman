@@ -5,6 +5,7 @@
 
 class Inky : public Ghost {
 public:
+  Inky(int X, int Y) : Ghost{X, Y} {}
   void move(int (&maze)[HEIGHT][WIDTH]) override;
   void print() override;
 };

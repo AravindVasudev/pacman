@@ -6,9 +6,10 @@
 
 class Ghost {
 public:
-  Point position{GHOST_X, GHOST_Y};
+  Point position;
   Point velocity{1, 0};
 
+  Ghost(int X, int Y) : position{X, Y} {}
   virtual void move(int (&maze)[HEIGHT][WIDTH]) = 0;
   virtual void print() = 0;
 };
