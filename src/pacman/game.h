@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "blinky.h"
 #include "constants.h"
 #include "ghost.h"
 #include "hero.h"
@@ -12,7 +13,7 @@ private:
   int maze[HEIGHT][WIDTH]{}; // The game maze.
   View view;
   Hero hero;
-  Ghost ghost;
+  Blinky blinky;
   int score{};
 
 private:

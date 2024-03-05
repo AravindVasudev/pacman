@@ -8,10 +8,10 @@ enum Color {
   Wall = 1,
   Pellet,
   HeroC,
-  Blinky,
-  Pinky,
-  Inky,
-  Clyde,
+  BlinkyC,
+  PinkyC,
+  InkyC,
+  ClydeC,
 };
 
 #endif

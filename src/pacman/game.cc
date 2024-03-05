@@ -73,18 +73,18 @@ void Game::run() {
         std::chrono::duration_cast<std::chrono::milliseconds>(now - ghostTime)
             .count();
     if (ghostTimeElapsed > GHOST_SPEED) {
-      ghost.move(maze);
+      blinky.move(maze);
       ghostTime = std::chrono::steady_clock::now();
     }
 
     // Draw the canvas.
     view.printMaze(maze, score);
     view.printHero(hero);
-    view.printGhost(ghost);
+    view.printGhost(blinky);
 
     // Game over :(
-    if (hero.position.X == ghost.position.X &&
-        hero.position.Y == ghost.position.Y) {
+    if (hero.position.X == blinky.position.X &&
+        hero.position.Y == blinky.position.Y) {
       move(0, 0);
       printw("GAME OVER!!!!! SCORE: %d\n", score);
       return;

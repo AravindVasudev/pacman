@@ -1,5 +1,6 @@
 
 #include "view.h"
+#include "blinky.h"
 #include "cell.h"
 #include "color.h"
 #include "constants.h"
@@ -24,10 +25,10 @@ View::View() {
   init_pair(Color::Wall, COLOR_BLUE, COLOR_BLACK);
   init_pair(Color::Pellet, COLOR_YELLOW, COLOR_BLACK);
   init_pair(Color::HeroC, COLOR_BLACK, COLOR_YELLOW);
-  init_pair(Color::Blinky, COLOR_BLACK, COLOR_RED);
-  init_pair(Color::Inky, COLOR_BLACK, COLOR_CYAN);
-  init_pair(Color::Pinky, COLOR_BLACK, COLOR_MAGENTA);
-  init_pair(Color::Clyde, COLOR_BLACK,
+  init_pair(Color::BlinkyC, COLOR_BLACK, COLOR_RED);
+  init_pair(Color::InkyC, COLOR_BLACK, COLOR_CYAN);
+  init_pair(Color::PinkyC, COLOR_BLACK, COLOR_MAGENTA);
+  init_pair(Color::ClydeC, COLOR_BLACK,
             COLOR_YELLOW); // TODO: Make Clyde orange.
 }
 
@@ -133,8 +134,8 @@ void View::printHero(const Hero &hero) {
   attroff(COLOR_PAIR(Color::HeroC));
 }
 
-void View::printGhost(const Ghost &ghost) {
-  attron(COLOR_PAIR(Color::Blinky));
+void View::printGhost(const Blinky &ghost) {
+  attron(COLOR_PAIR(Color::BlinkyC));
   mvprintw(ghost.position.X + 1, ghost.position.Y * 2, GHOST);
-  attroff(COLOR_PAIR(Color::Blinky));
+  attroff(COLOR_PAIR(Color::BlinkyC));
 }
