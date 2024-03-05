@@ -2,17 +2,24 @@
 #define GAME_H
 
 #include "blinky.h"
+#include "clyde.h"
 #include "constants.h"
-#include "ghost.h"
 #include "hero.h"
+#include "inky.h"
+#include "pinky.h"
 #include <iostream>
 
 class Game {
 private:
   int maze[HEIGHT][WIDTH]{}; // The game maze.
+  int score{};
+
+  // Characters.
   Hero hero;
   Blinky blinky;
-  int score{};
+  Pinky pinky;
+  Inky inky;
+  Clyde clyde;
 
 private:
   static void readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]);

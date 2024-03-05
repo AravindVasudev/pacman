@@ -63,6 +63,7 @@ void Game::readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]) {
   }
 }
 
+// TODO: decouple maze into its own class.
 void Game::printWall(const Cell &cell) {
   attron(COLOR_PAIR(Color::Wall));
 
@@ -165,11 +166,17 @@ void Game::run() {
       heroTime = std::chrono::steady_clock::now();
     }
 
+    // TODO: Make each of the ghost have their own independent speed. That'd
+    // make the game cooler.
     auto ghostTimeElapsed =
         std::chrono::duration_cast<std::chrono::milliseconds>(now - ghostTime)
             .count();
     if (ghostTimeElapsed > GHOST_SPEED) {
       blinky.move(maze);
+      pinky.move(maze);
+      inky.move(maze);
+      clyde.move(maze);
+
       ghostTime = std::chrono::steady_clock::now();
     }
 
@@ -177,10 +184,15 @@ void Game::run() {
     printMaze();
     hero.print();
     blinky.print();
+    pinky.print();
+    inky.print();
+    clyde.print();
 
     // Game over :(
-    if (hero.position.X == blinky.position.X &&
-        hero.position.Y == blinky.position.Y) {
+    if (Point::doesOverlap(blinky.position, hero.position) ||
+        Point::doesOverlap(pinky.position, hero.position) ||
+        Point::doesOverlap(inky.position, hero.position) ||
+        Point::doesOverlap(clyde.position, hero.position)) {
       move(0, 0);
       printw("GAME OVER!!!!! SCORE: %d\n", score);
       return;
