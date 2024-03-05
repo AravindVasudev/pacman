@@ -9,9 +9,10 @@ I'm still in the process of learning C++. The intent of this project is for me t
 Also, the implementation is pretty incomplete.
 
 ## TODOs
-- [ ] Add all 4 ghosts.
+- [X] Add all 4 ghosts.
 - [ ] Implement unqiue AI for the ghosts.
-- [ ] Add a ghost cage where the ghosts would start from.
+- [X] Add a ghost cage where the ghosts would start from.
+- [ ] Implement logic to restrict the ghost within the ghost cage.
 - [ ] Implement power pellet logic.
 - [ ] Implement wrap-up tunnels on the sides of the game maze.
 - [ ] Implement levels.
