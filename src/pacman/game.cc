@@ -1,6 +1,6 @@
 #include "game.h"
+#include "color.h"
 #include "hero.h"
-#include "view.h"
 
 #include <chrono>
 #include <curses.h>
@@ -12,6 +12,26 @@
 Game::Game(std::string mazeFile) {
   // Load the maze.
   readMaze(mazeFile, maze);
+
+  // Init Graphics.
+  setlocale(LC_ALL, ""); // Get the terminal outta boomer-mode.
+  initscr();
+  keypad(stdscr, true);
+  curs_set(false);
+  timeout(0);
+  raw();
+  noecho();
+
+  // Init Colors.
+  start_color();
+  init_pair(Color::Wall, COLOR_BLUE, COLOR_BLACK);
+  init_pair(Color::Pellet, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(Color::HeroC, COLOR_BLACK, COLOR_YELLOW);
+  init_pair(Color::BlinkyC, COLOR_BLACK, COLOR_RED);
+  init_pair(Color::InkyC, COLOR_BLACK, COLOR_CYAN);
+  init_pair(Color::PinkyC, COLOR_BLACK, COLOR_MAGENTA);
+  init_pair(Color::ClydeC, COLOR_BLACK,
+            COLOR_YELLOW); // TODO: Make Clyde orange.
 }
 
 void Game::readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]) {
@@ -40,6 +60,82 @@ void Game::readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]) {
     }
 
     row++;
+  }
+}
+
+void Game::printWall(const Cell &cell) {
+  attron(COLOR_PAIR(Color::Wall));
+
+  switch (cell) {
+  case Cell::empty:
+    printw(EMPTY);
+    break;
+  case Cell::topLeftCorner:
+    printw(TOP_LEFT_CORNER);
+    break;
+  case Cell::horizontal:
+    printw(HORIZONTAL);
+    break;
+  case Cell::topRightCorner:
+    printw(TOP_RIGHT_CORNER);
+    break;
+  case Cell::bottomLeftCorner:
+    printw(BOTTOM_LEFT_CORNER);
+    break;
+  case Cell::bottomRightCorner:
+    printw(BOTTOM_RIGHT_CORNER);
+    break;
+  case Cell::veritical:
+    printw(VERTICAL);
+    break;
+  case Cell::innerVertical:
+    printw(INNER_VERTICAL);
+    break;
+  case Cell::leftTee:
+    printw(LEFT_TEE);
+    break;
+  case Cell::innerBottomLeftCorner:
+    printw(INNER_BOTTOM_LEFT_CORNER);
+    break;
+  case Cell::innerTopLeftCorner:
+    printw(INNER_TOP_LEFT_CORNER);
+    break;
+  case Cell::innerTopRightCorner:
+    printw(INNER_TOP_RIGHT_CORNER);
+    break;
+  case Cell::innerBottomRightCorner:
+    printw(INNER_BOTTOM_RIGHT_CORNER);
+    break;
+  default:
+    // Do nothing.
+    break;
+  }
+
+  attroff(COLOR_PAIR(Color::Wall));
+}
+
+void Game::printMaze() {
+  move(0, 0);
+  printw("SCORE: %d\n", score);
+  for (int i = 0; i < HEIGHT; i++) {
+    for (int j = 0; j < WIDTH; j++) {
+      switch (maze[i][j]) {
+      case Cell::pellet:
+        attron(COLOR_PAIR(Color::Pellet));
+        printw(PELLET);
+        attroff(COLOR_PAIR(Color::Pellet));
+        break;
+      case Cell::powerPellet:
+        attron(COLOR_PAIR(Color::Pellet));
+        printw(POWER_PELLET);
+        attroff(COLOR_PAIR(Color::Pellet));
+        break;
+      default:
+        printWall(static_cast<Cell>(maze[i][j]));
+        break;
+      }
+    }
+    addch('\n');
   }
 }
 
@@ -78,9 +174,9 @@ void Game::run() {
     }
 
     // Draw the canvas.
-    view.printMaze(maze, score);
-    view.printHero(hero);
-    view.printGhost(blinky);
+    printMaze();
+    hero.print();
+    blinky.print();
 
     // Game over :(
     if (hero.position.X == blinky.position.X &&

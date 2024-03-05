@@ -1,5 +1,9 @@
 #include "hero.h"
 #include "cell.h"
+#include "color.h"
+
+#include <curses.h>
+#include <string>
 
 int Hero::move(int (&maze)[HEIGHT][WIDTH]) {
   Point newPosition{position.X + velocity.X, position.Y + velocity.Y};
@@ -58,4 +62,30 @@ void Hero::input(int (&maze)[HEIGHT][WIDTH], const char &input) {
     velocity.Y = 1;
     break;
   }
+}
+
+void Hero::print() {
+  // Simulate hero chewing.
+  std::string mouth;
+  if (heroMouthOpen) {
+    if (velocity.X == -1 && velocity.Y == 0) { // Up
+      mouth = "V";
+    } else if (velocity.X == 1 && velocity.Y == 0) { // Down
+      mouth = "^";
+    } else if (velocity.X == 0 && velocity.Y == -1) { // Left
+      mouth = ">";
+    } else { // Right
+      mouth = "<";
+    }
+
+    heroMouthOpen = false;
+  } else {
+    mouth = "—";
+    heroMouthOpen = true;
+  }
+
+  attron(COLOR_PAIR(Color::HeroC));
+  mvprintw(position.X + 1, position.Y * 2,
+           mouth.c_str()); // Wierd offsets, I know.
+  attroff(COLOR_PAIR(Color::HeroC));
 }

@@ -6,6 +6,7 @@
 class Blinky : public Ghost {
 public:
   void move(int (&maze)[HEIGHT][WIDTH]) override;
+  void print() override;
 };
 
 #endif

@@ -27,5 +27,5 @@ Also, the implementation is pretty incomplete.
 - [ ] TODO: Add a makefile.
 
 ```sh
-$ g++ -std=c++17 -lncurses src/pacman/view.cc src/pacman/game.cc src/pacman/hero.cc src/pacman/cell.cc src/pacman/ghost.cc src/main.cc -o bin/pacman.out
+$ g++ -std=c++17 -lncurses src/pacman/game.cc src/pacman/hero.cc src/pacman/cell.cc src/pacman/blinky.cc src/main.cc -o bin/pacman.out
 ```

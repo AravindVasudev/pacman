@@ -1,7 +1,9 @@
 #include "blinky.h"
 #include "cell.h"
+#include "color.h"
 
 #include <cstdlib>
+#include <curses.h>
 
 void Blinky::move(int (&maze)[HEIGHT][WIDTH]) {
   // Yeah yeah, I know how complex the original AI is.
@@ -33,4 +35,10 @@ void Blinky::move(int (&maze)[HEIGHT][WIDTH]) {
     velocity.Y = -1;
     break;
   }
+}
+
+void Blinky::print() {
+  attron(COLOR_PAIR(Color::BlinkyC));
+  mvprintw(position.X + 1, position.Y * 2, GHOST);
+  attroff(COLOR_PAIR(Color::BlinkyC));
 }
