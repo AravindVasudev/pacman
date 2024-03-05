@@ -10,8 +10,18 @@
 // Start Positions.
 #define HERO_X 23
 #define HERO_Y 13
-#define GHOST_X 14
-#define GHOST_Y 13
+
+#define BLINKY_X 14
+#define BLINKY_Y 11
+
+#define INKY_X 14
+#define INKY_Y 12
+
+#define PINKY_X 14
+#define PINKY_Y 13
+
+#define CLYDE_X 14
+#define CLYDE_Y 14
 
 // Speeds.
 #define HERO_SPEED 200

@@ -16,10 +16,10 @@ private:
 
   // Characters.
   Hero hero;
-  Blinky blinky{GHOST_X, GHOST_Y};
-  Pinky pinky{GHOST_X, GHOST_Y};
-  Inky inky{GHOST_X, GHOST_Y};
-  Clyde clyde{GHOST_X, GHOST_Y};
+  Blinky blinky{BLINKY_X, BLINKY_Y};
+  Pinky pinky{PINKY_X, PINKY_Y};
+  Inky inky{INKY_X, INKY_Y};
+  Clyde clyde{CLYDE_X, CLYDE_Y};
 
 private:
   static void readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]);
