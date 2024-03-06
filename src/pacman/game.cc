@@ -32,6 +32,15 @@ Game::Game(std::string mazeFile) {
   init_pair(Color::PinkyC, COLOR_BLACK, COLOR_MAGENTA);
   init_pair(Color::ClydeC, COLOR_BLACK,
             COLOR_YELLOW); // TODO: Make Clyde orange.
+
+  // Count the pellets in the loaded maze.
+  for (int i = 0; i < HEIGHT; i++) {
+    for (int j = 0; j < WIDTH; j++) {
+      if (static_cast<Cell>(maze[i][j]) == Cell::pellet) {
+        pelletCount++;
+      }
+    }
+  }
 }
 
 void Game::readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]) {
@@ -195,6 +204,13 @@ void Game::run() {
         Point::doesOverlap(clyde.position, hero.position)) {
       move(0, 0);
       printw("GAME OVER!!!!! SCORE: %d\n", score);
+      return;
+    }
+
+    // TODO: Fix this logic after implementing power pellet.
+    if (score >= pelletCount) {
+      move(0, 0);
+      printw("YOU WIN!!!!!!\n");
       return;
     }
 

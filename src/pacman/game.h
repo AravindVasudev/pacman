@@ -21,6 +21,8 @@ private:
   Inky inky{INKY_X, INKY_Y};
   Clyde clyde{CLYDE_X, CLYDE_Y};
 
+  int pelletCount{};
+
 private:
   static void readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]);
   void printWall(const Cell &cell);
