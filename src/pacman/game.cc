@@ -215,9 +215,7 @@ void Game::run() {
     // the type.
     if (Point::doesOverlap(blinky.position, hero.position)) {
       if (blinky.isFrightened) {
-        blinky.position.X = BLINKY_X;
-        blinky.position.Y = BLINKY_Y;
-        blinky.isFrightened = false;
+        blinky.reset();
         score += EAT_GHOST;
       } else {
         move(0, 0);
@@ -228,9 +226,7 @@ void Game::run() {
 
     if (Point::doesOverlap(inky.position, hero.position)) {
       if (inky.isFrightened) {
-        inky.position.X = BLINKY_X;
-        inky.position.Y = BLINKY_Y;
-        inky.isFrightened = false;
+        inky.reset();
         score += EAT_GHOST;
       } else {
         move(0, 0);
@@ -241,9 +237,7 @@ void Game::run() {
 
     if (Point::doesOverlap(pinky.position, hero.position)) {
       if (pinky.isFrightened) {
-        pinky.position.X = BLINKY_X;
-        pinky.position.Y = BLINKY_Y;
-        pinky.isFrightened = false;
+        pinky.reset();
         score += EAT_GHOST;
       } else {
         move(0, 0);
@@ -254,9 +248,7 @@ void Game::run() {
 
     if (Point::doesOverlap(clyde.position, hero.position)) {
       if (clyde.isFrightened) {
-        clyde.position.X = BLINKY_X;
-        clyde.position.Y = BLINKY_Y;
-        clyde.isFrightened = false;
+        clyde.reset();
         score += EAT_GHOST;
       } else {
         move(0, 0);
