@@ -22,6 +22,7 @@ private:
   Clyde clyde{CLYDE_X, CLYDE_Y};
 
   int pelletCount{};
+  int pelletsEaten{};
 
 private:
   static void readMaze(const std::string &path, int (&maze)[HEIGHT][WIDTH]);

@@ -38,7 +38,8 @@ void Blinky::move(int (&maze)[HEIGHT][WIDTH]) {
 }
 
 void Blinky::print() {
-  attron(COLOR_PAIR(Color::BlinkyC));
+  Color color = isFrightened ? Color::FrightenedC : Color::BlinkyC;
+  attron(COLOR_PAIR(color));
   mvprintw(position.X + 1, position.Y * 2, GHOST);
-  attroff(COLOR_PAIR(Color::BlinkyC));
+  attroff(COLOR_PAIR(color));
 }

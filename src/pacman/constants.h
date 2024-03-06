@@ -27,6 +27,11 @@
 #define HERO_SPEED 200
 #define GHOST_SPEED 200
 
+#define FRIGHTENED_DURATION 6000 // 6 seconds.
+
+// Points.
+#define POWER_PELLET_POINT 5
+
 // Box Drawing Constants.
 #define EMPTY "  "
 #define TOP_LEFT_CORNER "╔"

@@ -12,6 +12,7 @@ enum Color {
   PinkyC,
   InkyC,
   ClydeC,
+  FrightenedC,
 };
 
 #endif

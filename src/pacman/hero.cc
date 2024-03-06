@@ -17,9 +17,12 @@ int Hero::move(int (&maze)[HEIGHT][WIDTH]) {
   position.Y = newPosition.Y;
 
   // If the new position has a pellet, eat it.
-  if (maze[position.X][position.Y] == pellet) {
+  if (maze[position.X][position.Y] >= Cell::pellet) {
+    int score =
+        (maze[position.X][position.Y] == Cell::powerPellet ? POWER_PELLET_POINT
+                                                           : 1);
     maze[position.X][position.Y] = Cell::empty;
-    return 1;
+    return score;
   }
 
   return 0;

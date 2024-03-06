@@ -32,11 +32,12 @@ Game::Game(std::string mazeFile) {
   init_pair(Color::PinkyC, COLOR_BLACK, COLOR_MAGENTA);
   init_pair(Color::ClydeC, COLOR_BLACK,
             COLOR_YELLOW); // TODO: Make Clyde orange.
+  init_pair(Color::FrightenedC, COLOR_BLACK, COLOR_BLUE);
 
   // Count the pellets in the loaded maze.
   for (int i = 0; i < HEIGHT; i++) {
     for (int j = 0; j < WIDTH; j++) {
-      if (static_cast<Cell>(maze[i][j]) == Cell::pellet) {
+      if (static_cast<Cell>(maze[i][j]) >= Cell::pellet) {
         pelletCount++;
       }
     }
@@ -171,8 +172,18 @@ void Game::run() {
             .count();
 
     if (heroTimeElapsed > HERO_SPEED) {
-      score += hero.move(maze);
       heroTime = std::chrono::steady_clock::now();
+      if (int eaten = hero.move(maze); eaten > 0) {
+        score += eaten;
+        pelletsEaten++;
+
+        if (eaten > 1) { // Power Pellet.
+          blinky.isFrightened = true;
+          pinky.isFrightened = true;
+          inky.isFrightened = true;
+          clyde.isFrightened = true;
+        }
+      }
     }
 
     // TODO: Make each of the ghost have their own independent speed. That'd
@@ -207,8 +218,7 @@ void Game::run() {
       return;
     }
 
-    // TODO: Fix this logic after implementing power pellet.
-    if (score >= pelletCount) {
+    if (pelletsEaten >= pelletCount) {
       move(0, 0);
       printw("YOU WIN!!!!!!\n");
       return;
