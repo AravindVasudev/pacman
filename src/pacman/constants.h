@@ -31,6 +31,7 @@
 
 // Points.
 #define POWER_PELLET_POINT 5
+#define EAT_GHOST 10
 
 // Box Drawing Constants.
 #define EMPTY "  "

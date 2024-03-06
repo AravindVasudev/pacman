@@ -188,6 +188,7 @@ void Game::run() {
 
     // TODO: Make each of the ghost have their own independent speed. That'd
     // make the game cooler.
+    // TODO: Add ghosts to an array; too much repeated code.
     auto ghostTimeElapsed =
         std::chrono::duration_cast<std::chrono::milliseconds>(now - ghostTime)
             .count();
@@ -209,13 +210,59 @@ void Game::run() {
     clyde.print();
 
     // Game over :(
-    if (Point::doesOverlap(blinky.position, hero.position) ||
-        Point::doesOverlap(pinky.position, hero.position) ||
-        Point::doesOverlap(inky.position, hero.position) ||
-        Point::doesOverlap(clyde.position, hero.position)) {
-      move(0, 0);
-      printw("GAME OVER!!!!! SCORE: %d\n", score);
-      return;
+    // ⚠️⚠️⚠️ DUPLICATE CODE WARNING ⚠️⚠️⚠️
+    // TODO: Figure out how to create an array with the abstract base class as
+    // the type.
+    if (Point::doesOverlap(blinky.position, hero.position)) {
+      if (blinky.isFrightened) {
+        blinky.position.X = BLINKY_X;
+        blinky.position.Y = BLINKY_Y;
+        blinky.isFrightened = false;
+        score += EAT_GHOST;
+      } else {
+        move(0, 0);
+        printw("GAME OVER!!!!! SCORE: %d\n", score);
+        return;
+      }
+    }
+
+    if (Point::doesOverlap(inky.position, hero.position)) {
+      if (inky.isFrightened) {
+        inky.position.X = BLINKY_X;
+        inky.position.Y = BLINKY_Y;
+        inky.isFrightened = false;
+        score += EAT_GHOST;
+      } else {
+        move(0, 0);
+        printw("GAME OVER!!!!! SCORE: %d\n", score);
+        return;
+      }
+    }
+
+    if (Point::doesOverlap(pinky.position, hero.position)) {
+      if (pinky.isFrightened) {
+        pinky.position.X = BLINKY_X;
+        pinky.position.Y = BLINKY_Y;
+        pinky.isFrightened = false;
+        score += EAT_GHOST;
+      } else {
+        move(0, 0);
+        printw("GAME OVER!!!!! SCORE: %d\n", score);
+        return;
+      }
+    }
+
+    if (Point::doesOverlap(clyde.position, hero.position)) {
+      if (clyde.isFrightened) {
+        clyde.position.X = BLINKY_X;
+        clyde.position.Y = BLINKY_Y;
+        clyde.isFrightened = false;
+        score += EAT_GHOST;
+      } else {
+        move(0, 0);
+        printw("GAME OVER!!!!! SCORE: %d\n", score);
+        return;
+      }
     }
 
     if (pelletsEaten >= pelletCount) {
