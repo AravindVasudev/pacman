@@ -25,7 +25,7 @@
 
 // Speeds.
 #define HERO_SPEED 200
-#define GHOST_SPEED 150
+#define GHOST_SPEED 200
 
 // Box Drawing Constants.
 #define EMPTY "  "
