@@ -13,7 +13,7 @@ Also, the implementation is pretty incomplete.
 - [ ] Implement unqiue AI for the ghosts.
 - [X] Add a ghost cage where the ghosts would start from.
 - [ ] Implement logic to restrict the ghost within the ghost cage.
-- [ ] Implement power pellet logic.
+- [x] Implement power pellet logic.
 - [ ] Implement wrap-up tunnels on the sides of the game maze.
 - [ ] Implement levels.
 - [ ] Implement multiple life-s.
