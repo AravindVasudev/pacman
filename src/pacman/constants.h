@@ -27,7 +27,8 @@
 #define HERO_SPEED 200
 #define GHOST_SPEED 200
 
-#define FRIGHTENED_DURATION 5000 // 5 seconds.
+#define FRIGHTENED_DURATION 5000    // 5 seconds.
+#define FRIGHTENED_BLINK_START 3000 // Starts blinking after 3 seconds.
 
 // Points.
 #define POWER_PELLET_POINT 5

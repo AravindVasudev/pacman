@@ -37,9 +37,4 @@ void Pinky::move(int (&maze)[HEIGHT][WIDTH]) {
   }
 }
 
-void Pinky::print() {
-  Color color = isFrightened ? Color::FrightenedC : Color::PinkyC;
-  attron(COLOR_PAIR(color));
-  mvprintw(position.X + 1, position.Y * 2, GHOST);
-  attroff(COLOR_PAIR(Color::PinkyC));
-}
+void Pinky::print() { Ghost::draw(Color::PinkyC); }

@@ -37,9 +37,4 @@ void Clyde::move(int (&maze)[HEIGHT][WIDTH]) {
   }
 }
 
-void Clyde::print() {
-  Color color = isFrightened ? Color::FrightenedC : Color::ClydeC;
-  attron(COLOR_PAIR(color));
-  mvprintw(position.X + 1, position.Y * 2, GHOST);
-  attroff(COLOR_PAIR(color));
-}
+void Clyde::print() { Ghost::draw(Color::ClydeC); }

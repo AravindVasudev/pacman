@@ -33,6 +33,7 @@ Game::Game(std::string mazeFile) {
   init_pair(Color::ClydeC, COLOR_BLACK,
             COLOR_YELLOW); // TODO: Make Clyde orange.
   init_pair(Color::FrightenedC, COLOR_BLACK, COLOR_BLUE);
+  init_pair(Color::FrightenedBlinkC, COLOR_BLACK, COLOR_WHITE);
 
   // Count the pellets in the loaded maze.
   for (int i = 0; i < HEIGHT; i++) {
@@ -195,9 +196,21 @@ void Game::run() {
           std::chrono::duration_cast<std::chrono::milliseconds>(now -
                                                                 frightenedClock)
               .count();
+
+      if (frightenedElapsed > FRIGHTENED_BLINK_START) {
+        for (const auto &ghost : ghosts) {
+          if (ghost->isFrightened) {
+            // At this point, the ghosts are already frightened. This just makes
+            // them blink.
+            ghost->frightenedTimeoutBlink = true;
+          }
+        }
+      }
+
       if (frightenedElapsed > FRIGHTENED_DURATION) {
         for (const auto &ghost : ghosts) {
           ghost->isFrightened = false;
+          ghost->frightenedTimeoutBlink = false;
         }
 
         frightenedMode = false;
@@ -206,7 +219,6 @@ void Game::run() {
 
     // TODO: Make each of the ghost have their own independent speed. That'd
     // make the game cooler.
-    // TODO: Add ghosts to an array; too much repeated code.
     auto ghostTimeElapsed =
         std::chrono::duration_cast<std::chrono::milliseconds>(now - ghostTime)
             .count();
