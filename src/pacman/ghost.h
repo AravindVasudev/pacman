@@ -16,6 +16,7 @@ public:
   void frightenedMove(int (&maze)[HEIGHT][WIDTH]);
   void reset();
   virtual void print() = 0;
+  virtual ~Ghost(){};
 };
 
 #endif

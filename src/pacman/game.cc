@@ -178,10 +178,9 @@ void Game::run() {
         pelletsEaten++;
 
         if (eaten > 1) { // Power Pellet.
-          blinky.isFrightened = true;
-          pinky.isFrightened = true;
-          inky.isFrightened = true;
-          clyde.isFrightened = true;
+          for (const auto &ghost : ghosts) {
+            ghost->isFrightened = true;
+          }
         }
       }
     }
@@ -193,10 +192,9 @@ void Game::run() {
         std::chrono::duration_cast<std::chrono::milliseconds>(now - ghostTime)
             .count();
     if (ghostTimeElapsed > GHOST_SPEED) {
-      blinky.move(maze);
-      pinky.move(maze);
-      inky.move(maze);
-      clyde.move(maze);
+      for (const auto &ghost : ghosts) {
+        ghost->move(maze);
+      }
 
       ghostTime = std::chrono::steady_clock::now();
     }
@@ -204,56 +202,21 @@ void Game::run() {
     // Draw the canvas.
     printMaze();
     hero.print();
-    blinky.print();
-    pinky.print();
-    inky.print();
-    clyde.print();
+    for (const auto &ghost : ghosts) {
+      ghost->print();
+    }
 
     // Game over :(
-    // ⚠️⚠️⚠️ DUPLICATE CODE WARNING ⚠️⚠️⚠️
-    // TODO: Figure out how to create an array with the abstract base class as
-    // the type.
-    if (Point::doesOverlap(blinky.position, hero.position)) {
-      if (blinky.isFrightened) {
-        blinky.reset();
-        score += EAT_GHOST;
-      } else {
-        move(0, 0);
-        printw("GAME OVER!!!!! SCORE: %d\n", score);
-        return;
-      }
-    }
-
-    if (Point::doesOverlap(inky.position, hero.position)) {
-      if (inky.isFrightened) {
-        inky.reset();
-        score += EAT_GHOST;
-      } else {
-        move(0, 0);
-        printw("GAME OVER!!!!! SCORE: %d\n", score);
-        return;
-      }
-    }
-
-    if (Point::doesOverlap(pinky.position, hero.position)) {
-      if (pinky.isFrightened) {
-        pinky.reset();
-        score += EAT_GHOST;
-      } else {
-        move(0, 0);
-        printw("GAME OVER!!!!! SCORE: %d\n", score);
-        return;
-      }
-    }
-
-    if (Point::doesOverlap(clyde.position, hero.position)) {
-      if (clyde.isFrightened) {
-        clyde.reset();
-        score += EAT_GHOST;
-      } else {
-        move(0, 0);
-        printw("GAME OVER!!!!! SCORE: %d\n", score);
-        return;
+    for (const auto &ghost : ghosts) {
+      if (Point::doesOverlap(ghost->position, hero.position)) {
+        if (ghost->isFrightened) {
+          ghost->reset();
+          score += EAT_GHOST;
+        } else {
+          move(0, 0);
+          printw("GAME OVER!!!!! SCORE: %d\n", score);
+          return;
+        }
       }
     }
 
