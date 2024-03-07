@@ -17,6 +17,7 @@ private:
   int score{};
   int pelletCount{};
   int pelletsEaten{};
+  bool frightenedMode{};
 
   // Characters.
   Hero hero;

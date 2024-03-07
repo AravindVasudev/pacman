@@ -153,6 +153,7 @@ void Game::printMaze() {
 void Game::run() {
   auto heroTime = std::chrono::steady_clock::now();
   auto ghostTime = std::chrono::steady_clock::now();
+  auto frightenedClock = std::chrono::steady_clock::now();
 
   while (true) {
     char input = getch();
@@ -181,7 +182,25 @@ void Game::run() {
           for (const auto &ghost : ghosts) {
             ghost->isFrightened = true;
           }
+
+          frightenedMode = true;
+          frightenedClock = std::chrono::steady_clock::now();
         }
+      }
+    }
+
+    // Reset frightened mode post timer.
+    if (frightenedMode) {
+      auto frightenedElapsed =
+          std::chrono::duration_cast<std::chrono::milliseconds>(now -
+                                                                frightenedClock)
+              .count();
+      if (frightenedElapsed > FRIGHTENED_DURATION) {
+        for (const auto &ghost : ghosts) {
+          ghost->isFrightened = false;
+        }
+
+        frightenedMode = false;
       }
     }
 
