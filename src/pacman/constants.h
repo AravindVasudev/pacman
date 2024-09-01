@@ -1,7 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#define FRAME_RATE 30
+#define FRAME_RATE 10
 
 // Game maze size.
 #define WIDTH 28
@@ -24,8 +24,9 @@
 #define CLYDE_Y 14
 
 // Speeds.
-#define HERO_SPEED 150
-#define GHOST_SPEED 150
+// TODO: Setting independent speeds cause input lag. Fix this.
+#define HERO_SPEED 0
+#define GHOST_SPEED 0
 
 #define FRIGHTENED_DURATION 5000    // 5 seconds.
 #define FRIGHTENED_BLINK_START 3000 // Starts blinking after 3 seconds.
