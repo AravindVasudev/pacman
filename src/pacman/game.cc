@@ -157,7 +157,7 @@ void Game::run() {
   auto frightenedClock = std::chrono::steady_clock::now();
 
   while (true) {
-    char input = getch();
+    int input = getch();
 
     if (input == 'q') {
       break;

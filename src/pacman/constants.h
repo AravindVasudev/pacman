@@ -1,7 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#define FRAME_RATE 60 // 60 FPS
+#define FRAME_RATE 30
 
 // Game maze size.
 #define WIDTH 28
@@ -24,8 +24,8 @@
 #define CLYDE_Y 14
 
 // Speeds.
-#define HERO_SPEED 200
-#define GHOST_SPEED 200
+#define HERO_SPEED 150
+#define GHOST_SPEED 150
 
 #define FRIGHTENED_DURATION 5000    // 5 seconds.
 #define FRIGHTENED_BLINK_START 3000 // Starts blinking after 3 seconds.
@@ -51,11 +51,5 @@
 #define PELLET ". "
 #define POWER_PELLET "● "
 #define GHOST "\""
-
-// Direction Key Code.
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
 
 #endif

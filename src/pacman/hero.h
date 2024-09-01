@@ -17,7 +17,7 @@ public:
   Point velocity{0, -1};
 
   int move(int (&maze)[HEIGHT][WIDTH]); // Returns score.
-  void input(int (&maze)[HEIGHT][WIDTH], const char &input);
+  void input(int (&maze)[HEIGHT][WIDTH], const int &input);
   void print();
 };
 
